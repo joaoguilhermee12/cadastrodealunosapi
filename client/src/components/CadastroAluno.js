@@ -1,12 +1,8 @@
 import React, { useState } from 'react';
 import Axios from "axios";
 
-function CadastroAluno() {
+function CadastroAluno({ onAlunoCadastrado }) {
   const [values, setValues] = useState({ nome: '', idade: '' });
-  const [nome, setNome] = useState('');
-  const [idade, setIdade] = useState('');
-
-  console.log(values);
 
   const handleChangeValues = (value) => {
     setValues(prevValue => ({
@@ -22,6 +18,8 @@ function CadastroAluno() {
       idade: values.idade
     }).then((response) => {
       console.log(response);
+      setValues({ nome: '', idade: '' });
+      onAlunoCadastrado();
     }).catch((error) => {
       console.error(error);
     })
@@ -41,6 +39,7 @@ function CadastroAluno() {
                 className="form-control"
                 id="nome"
                 name='nome'
+                value={values.nome}
                 onChange={handleChangeValues}
               />
             </div>
@@ -51,6 +50,7 @@ function CadastroAluno() {
                 name='idade'
                 className="form-control"
                 id="idade"
+                value={values.idade}
                 onChange={handleChangeValues}
               />
             </div>

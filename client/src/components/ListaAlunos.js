@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Axios from "axios";
 
-function ListaAlunos() {
+function ListaAlunos({ atualizarLista }) {
   const [alunos, setAlunos] = useState([]);
   const [editingAluno, setEditingAluno] = useState(null);
   const [editedData, setEditedData] = useState({ nome: '', idade: '' });
@@ -14,7 +14,7 @@ function ListaAlunos() {
       .catch((error) => {
         console.error(error);
       });
-  }, []);
+  }, [atualizarLista]);
 
   const handleExcluirAluno = (alunoId) => {
     Axios.delete(`http://localhost:3001/excluir/${alunoId}`)
